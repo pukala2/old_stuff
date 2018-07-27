@@ -1,0 +1,171 @@
+// Example program
+#include <iostream>
+#include <string>
+ 
+ class abstr_emp { 
+ private: 
+ 	std::string fname; 
+ 	std::string lname; 
+ 	std::string job; 
+ public: 
+ 	abstr_emp():fname("brak"),lname("brak"),job("brak"){} 
+ 	abstr_emp(const std::string &fn, const std::string &ln, const std::string &j):fname(fn),lname(ln),job(j){}  
+ 	virtual void ShowAll()const;//obsluguje i wyswietla wszystkie dane 
+ 	virtual void SetAll();//prosi urzytkownika o podanie wartosci 
+ 	friend std::ostream & operator<<(std::iostream & os, const abstr_emp & ab); //wyswietla imie i nazwisko 
+    //combilator swirowal, powienien byc czysto virtual destruktor
+ 	virtual ~abstr_emp(){}; //virtualna klasa bazowa 
+ }; 
+ 
+ 
+ class Employee :public abstr_emp{ 
+ public: 
+ 	Employee():abstr_emp(){}
+ 	Employee(const std::string &fn, const std::string &ln, const std::string &j):abstr_emp(fn,ln,j){}
+ 	virtual void ShowAll()const; 
+ 	virtual void SetAll(); 
+ 	
+ }; 
+ 
+ 
+ class Manager :virtual public abstr_emp { 
+ private: 
+ 	int chargeof; //liczba obiektow abstr_emp ktorymi zarzadza 
+ protected: 
+ 	int inChargeof()const { return chargeof; } //wyjscie 
+ 	int & inChargeof() { return chargeof; }  //wejscie 
+ public: 
+ 	Manager():abstr_emp(),chargeof(0){} 
+ 	Manager(const std::string &fn, const std::string &ln, const std::string &j, int ico):abstr_emp(fn,ln,j),chargeof(ico){} 
+ 	Manager(const abstr_emp & ab, int ico):abstr_emp(ab),chargeof(ico){}
+ 	Manager(const Manager & m):abstr_emp(m),chargeof(m.chargeof){}
+ 	virtual void ShowAll()const; 
+ 	virtual void SetAll(); 
+ }; 
+
+
+class Fink:virtual public abstr_emp{
+private:
+std::string reportsto; //do kogo fink donosiciel przysyla raport
+protected:
+const std::string ReportsTo()const {return reportsto;}
+public:
+Fink():abstr_emp(),reportsto("brak"){}
+Fink(const std::string &fn, const std::string &ln, const std::string &j, std::string rpo):abstr_emp(fn,ln,j),reportsto(rpo){}
+Fink(const abstr_emp & ab, std::string rpo):abstr_emp(ab),reportsto(rpo){}
+Fink(const Fink & fi):abstr_emp(fi),reportsto(fi.reportsto){}
+virtual void ShowAll()const; 
+virtual void SetAll(); 
+};
+
+class HighFink: public Manager, public Fink{ //glowny donosiciel
+ public:
+HighFink(const std::string &fn, const std::string &ln, const std::string &j, std::string rpo, int ico):abstr_emp(fn,ln,j),Manager(fn,ln,j,ico),Fink(fn,ln,j,rpo){}
+HighFink(const abstr_emp & ab, std::string rpo, int ico):abstr_emp(ab),Manager(ab,ico),Fink(ab,rpo){}
+HighFink(const Fink & fi, int ico):abstr_emp(fi),Manager(fi,ico),Fink(fi){}
+HighFink(const Manager & m, const std::string & rpo):abstr_emp(m),Manager(m),Fink(m,rpo){}
+HighFink(const HighFink & h):abstr_emp(h),Manager(h),Fink(h){}
+virtual void ShowAll()const; 
+virtual void SetAll();    
+};
+
+int main()
+{
+  
+  Employee em("Tadeusz","Hubert","Sprzedawca");
+//  std::cout<<em;  
+  em.ShowAll();
+ 
+ std::cout<<std::endl;
+  
+ Manager ma("Amforiusz", "Smoczewski", "Malarz",5);
+ // std::cout<<ma;
+ ma.ShowAll();
+  
+ std::cout<<std::endl;
+ 
+ Fink fi("Maurycy","Olkuski","Hydraulik","Julian Bar");
+ //std::cout<<fi;
+ fi.ShowAll();
+ 
+ std::cout<<std::endl;
+ 
+ HighFink hf(ma, "Jan Kudlaty"); //rekrutacja
+ hf.ShowAll();
+ 
+ std::cout<<std::endl;
+  
+  
+  
+  
+  
+  
+}
+
+//metods class abst_em
+ void abstr_emp::ShowAll()const{
+    std::cout<<"imie :"<<fname<<std::endl;
+    std::cout<<"nazwisko :"<<lname<<std::endl;
+    std::cout<<"Praca :"<<job<<std::endl;
+}
+
+void abstr_emp::SetAll(){
+    std::cout<<"Podaj imie :";
+    std::cin>>fname;
+    std::cout<<"Podaj nazwisko :";
+    std::cin>>lname;
+    std::cout<<"Podaj prace :";
+    std::cin>>job;
+}
+
+std::ostream & operator<<(std::iostream & os, const abstr_emp & ab){
+ os<<"imie :"<<ab.fname<<"\n";   
+ os<<"nazwisko :"<<ab.lname<<"\n";  
+ return os;
+}
+
+
+//metods class Employe
+void Employee::ShowAll()const{
+    abstr_emp::ShowAll();
+}
+
+void Employee::SetAll(){
+   abstr_emp::SetAll();
+}
+
+//metods class manager
+void Manager::ShowAll()const{
+    abstr_emp::ShowAll();
+    std::cout<<"Liczba osob do zarzadzania:"<<chargeof<<"\n";
+}
+
+void Manager::SetAll(){
+   abstr_emp::SetAll();
+   std::cout<<"Podaj liczbe osob do zarzadzania:";
+   std::cin>>chargeof;
+}
+
+//metods class Fink
+void Fink::ShowAll()const{
+    abstr_emp::ShowAll();
+    std::cout<<"Przysyla raport do:"<<reportsto<<"\n";
+}
+
+void Fink::SetAll(){
+   abstr_emp::SetAll();
+   std::cout<<"Do kogo przysyla raport:";
+   std::cin>>reportsto;
+}
+
+//metods HighFinker
+void HighFink::ShowAll()const{
+    Manager::ShowAll();
+    std::cout<<"Przysyla raport do:"<<Fink::ReportsTo()<<std::endl;
+}
+
+void HighFink::SetAll(){
+  Fink::SetAll();
+  std::cout<<"Podaj liczbe osob do zarzadzania:";
+  std::cin>>inChargeof();
+}

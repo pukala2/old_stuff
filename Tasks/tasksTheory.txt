@@ -1,0 +1,25 @@
+1.Jaki domylny dostep ma class ?
+2.Jaki domylny dostep ma struct ?
+3.Jakie jest domyslne dziedziczenie w class i struct ? od czego to zalezy ? 
+4.Jakie znasz smart-poinery ? Jaki zostal wycofany ?
+5.Co to jest przyjazn ? 
+6.Jak wyglada move constructor ?
+7.Co to plytka kopia a co to gleboka kopia ?
+8.Jak wyglada przeciazony operator = ?
+9.Czy klasa domyslnie generuje construktor, copy constructor, operator == .
+10.Lambda w c++
+11.Kontenery
+12.Templaty class
+13.Rzutowanie typow
+14.Problem Diamentu
+15.New i delete
+16.Roznica miedzy class i struct
+17.Widocznosci dziedziczenia
+18.Widocznosci w klasie
+19.Wyjatki
+20.Const
+21.Operator zasigu
+22.Co to virtualna funkcja
+23.Sementyka wskaznikow
+24.Roznica pomiedzy C a C++
+25.Roznica pomiedzy * a &

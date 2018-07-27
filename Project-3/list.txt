@@ -1,0 +1,92 @@
+entities
+jednostka
+reflects
+odzwierciedlic
+refers
+odnosic sie
+acquiring
+nabywanie
+hence
+stad
+compared
+w porownaniu
+altered
+zmieniony
+applicable
+odpowiedni
+distinguish
+rozrozniac
+therefor
+w zwiasku z tym
+achieved
+osiagniete
+across
+przez
+invoked
+odwolac sie
+proviede
+zapewniac
+current
+obecny
+resolve
+rozwiazac
+frequently
+czesto
+stack
+stos
+perform
+wykonac
+ceratin
+pewny
+begin
+rozpoczac
+held
+trzymany
+receive
+otrzymac
+reminder
+przypomnienie
+resize
+zmien rozmiar
+calling itself
+wywolujaca sie
+inhert
+dziedziczy
+shall
+bedzie
+receiving
+odbieranie
+nest
+gniazdo
+occur
+wystepowac
+affiliat
+przylaczyc
+unary
+jednolity
+precede
+poprzedzac
+follow
+postepowac
+violation
+naruszenie
+consider
+rozwazac
+advantage
+korzysc
+consider
+rozwazyc
+affiliated
+powiazane
+scheme
+schemat
+whom
+kogo
+yields to
+daje to
+ambiguity
+dwuznacznosc
+accomplish
+ukonczyc
+although
+mimo ze
